@@ -8,6 +8,10 @@ if [ "$INSITE_DOCKER_USE_NEST_SERVER" == 1 ]
 then
     echo "Running with NEST SERVER"
     nest-server start
+elif [[ "${NEST_CONTAINER_MODE}" = "nest-server-mpi" ]]
+then
+    echo "Running with NEST SERVER MPI"
+    mpirun -np "${NEST_SERVER_MPI_NUM:-1}" nest-server-mpi
 else
     echo "Running without NEST SERVER"
     source run_simulation.sh
